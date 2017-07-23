@@ -1,0 +1,10 @@
+# untracked files
+Assets/privateCode.txt
+Builds
+Library
+Temp
+obj
+
+*.userprefs
+*.sln
+*.csproj
