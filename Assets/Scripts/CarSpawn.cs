@@ -14,9 +14,11 @@ public class CarSpawn : MonoBehaviour {
 	private Transform[] spawnPoints;
 
 	private float elapsedTime;
+	private AudioSource audioSource;
 
 	// Use this for initialization
 	void Start () {
+		audioSource = GetComponent<AudioSource> ();
 		spawnPoints = GameObject.FindGameObjectsWithTag ("SpawnPoint")
 			.Select(point => point.transform).ToArray();
 
@@ -27,6 +29,10 @@ public class CarSpawn : MonoBehaviour {
 	}
 
 	private IEnumerator spawnAfterTime() {
+		if (GameState.instance.getGameState == GameState.StateOfGame.ending) {
+			yield break;
+		}
+
 		float timeUntilNext = timeUntilNextSpawn ();
 		yield return new WaitForSeconds (timeUntilNext);
 		elapsedTime += timeUntilNext;
@@ -37,6 +43,13 @@ public class CarSpawn : MonoBehaviour {
 	}
 
 	private float timeUntilNextSpawn() {
+		if (audioSource != null) {
+			audioSource.pitch = Mathf.Lerp (1.15f, 1f, difficultyCurve.Evaluate (elapsedTime / curveTimeLength));
+		}
 		return  minTimeBetweenSpawn + (difficultyCurve.Evaluate (elapsedTime / curveTimeLength) * maxTimeBetweenSpawn);
+	}
+
+	public void StopMusic()  {
+		audioSource.Stop ();
 	}
 }

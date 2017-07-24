@@ -30,4 +30,14 @@ public class Score : MonoBehaviour {
 	private void showScore() {
 		scoreText.text = "Cars passed: " + score.ToString ();
 	}
+
+	public void hideScore() {
+		scoreText.enabled = false;
+	}
+
+	public int getScore {
+		get {
+			return score;
+		}
+	}
 }

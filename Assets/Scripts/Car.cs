@@ -78,12 +78,16 @@ public class Car : MonoBehaviour {
 
 	private void moveForward() {
 		transform.position += transform.forward * Time.deltaTime * 8f; // magic speed sry
-		Patience.instance.hidePatienceIndicator (this);
+		if (GameState.instance.getGameState == GameState.StateOfGame.play) {
+			Patience.instance.hidePatienceIndicator (this);
+		}
 	}
 
 	private void waitImpatiently() {
-		Patience.instance.losePatience (Time.deltaTime);
-		Patience.instance.showPatienceIndicator (this);
+		if (GameState.instance.getGameState == GameState.StateOfGame.play) {
+			Patience.instance.losePatience (Time.deltaTime);
+			Patience.instance.showPatienceIndicator (this);
+		}
 	}
 
 	private void OnDrawGizmosSelected() {
