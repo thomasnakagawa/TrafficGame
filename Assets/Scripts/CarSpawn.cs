@@ -28,6 +28,12 @@ public class CarSpawn : MonoBehaviour {
 		elapsedTime = 0f;
 	}
 
+	void Update() {
+		if (audioSource != null) {
+			audioSource.pitch += Time.deltaTime * 0.00085f;
+		}
+	}
+
 	private IEnumerator spawnAfterTime() {
 		if (GameState.instance.getGameState == GameState.StateOfGame.ending) {
 			yield break;
@@ -43,9 +49,6 @@ public class CarSpawn : MonoBehaviour {
 	}
 
 	private float timeUntilNextSpawn() {
-		if (audioSource != null) {
-			audioSource.pitch = Mathf.Lerp (1.15f, 1f, difficultyCurve.Evaluate (elapsedTime / curveTimeLength));
-		}
 		return  minTimeBetweenSpawn + (difficultyCurve.Evaluate (elapsedTime / curveTimeLength) * maxTimeBetweenSpawn);
 	}
 

@@ -35,7 +35,7 @@ public class EndingCanvas : MonoBehaviour {
 		leaderboardView.gameObject.SetActive (false);
 
 		// set focus on the input field
-		EventSystem.current.SetSelectedGameObject(GameObject.Find ("InputField"));
+		//EventSystem.current.SetSelectedGameObject(GameObject.Find ("InputField"));
 
 		// get leaderboard data to get scores from
 		leaderboardData = GameObject.Find("LeaderboardData").GetComponent<LeaderboardData>();

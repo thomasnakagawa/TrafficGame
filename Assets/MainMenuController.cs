@@ -33,6 +33,13 @@ public class MainMenuController : MonoBehaviour {
 
 	public void OnToggleLeaderboard() {
 		transform.Find ("LeaderPanel").gameObject.SetActive (!transform.Find ("LeaderPanel").gameObject.activeSelf);
+		transform.Find ("HelpPanel").gameObject.SetActive (false);
 		leaderboardData.FetchScores ();
+	}
+
+	public void OnToggleHelp() {
+		transform.Find ("HelpPanel").gameObject.SetActive (!transform.Find ("HelpPanel").gameObject.activeSelf);
+		transform.Find ("LeaderPanel").gameObject.SetActive (false);
+
 	}
 }
